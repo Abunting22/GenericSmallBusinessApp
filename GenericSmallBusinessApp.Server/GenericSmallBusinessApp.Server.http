@@ -1,0 +1,6 @@
+@GenericSmallBusinessApp.Server_HostAddress = http://localhost:5236
+
+GET {{GenericSmallBusinessApp.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
