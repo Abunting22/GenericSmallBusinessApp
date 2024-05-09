@@ -20,30 +20,32 @@ namespace GenericSmallBusinessApp.Server.Controllers
             return Ok(users);
         }
 
-        [HttpGet("GetUserById")]
+        [HttpGet("GetUserById/{id}")]
+        [ServiceFilter(typeof(IdAuthorizationAttribute))]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
             var user = await service.GetUserByUserIdRequest(id);
             return Ok(user);
         }
 
-        [HttpPost("AddUser")]
+        [HttpPost("AddUser/{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult> AddUser([FromForm] UserDto request)
+        public async Task<ActionResult> AddUser([FromForm] UserDto request, int id)
         {
             var result = await service.AddUserRequest(request);
             return Ok(result);
         }
 
         [HttpPost("UpdateUser")]
+        [ServiceFilter(typeof(IdAuthorizationAttribute))]
         public async Task<ActionResult> UpdateUser([FromForm] UserDto request)
         {
             var result = await service.UpdateUserRequest(request);
             return Ok(result);
         }
 
-        [HttpDelete("DeleteUser")]
-        [Authorize(Roles = "Admin")]
+        [HttpDelete("DeleteUser/{id}")]
+        [ServiceFilter(typeof(IdAuthorizationAttribute))]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var result = await service.DeleteUserRequeset(id);

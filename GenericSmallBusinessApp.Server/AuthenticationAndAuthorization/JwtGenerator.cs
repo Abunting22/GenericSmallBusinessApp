@@ -16,7 +16,9 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
             List<Claim> claims = new() 
             {
                 new Claim(ClaimTypes.Name, user.EmailAddress),
-                new Claim(ClaimTypes.Role, roleName)
+                new Claim("id", user.UserId.ToString()),
+                new Claim(ClaimTypes.Role, roleName),
+                new Claim(ClaimTypes.SerialNumber, Guid.NewGuid().ToString())
             };
 
             var issuer = configuration.GetSection("JwtSettings:Issuer").Value;
@@ -30,7 +32,7 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
                 audience: audience,
                 claims: claims,
                 signingCredentials: credentials,
-                expires: DateTime.UtcNow.AddHours(1)
+                expires: DateTime.UtcNow.AddMinutes(30)
             );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
