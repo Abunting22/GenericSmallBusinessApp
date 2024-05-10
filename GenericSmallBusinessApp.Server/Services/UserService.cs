@@ -1,5 +1,9 @@
-﻿using GenericSmallBusinessApp.Server.Interfaces;
+﻿using System.Security.Claims;
+
+using GenericSmallBusinessApp.Server.Interfaces;
 using GenericSmallBusinessApp.Server.Models;
+
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace GenericSmallBusinessApp.Server.Services
 {
@@ -24,9 +28,10 @@ namespace GenericSmallBusinessApp.Server.Services
             return result;
         }
 
-        public async Task<bool> UpdateUserRequest(UserDto request)
+        public async Task<bool> UpdateUserRequest(UserDto request, int id)
         {
             var user = ConvertDtoRequest(request);
+            user.UserId = id;
             var result = await repository.Update(user);
             return result;
         }

@@ -1,4 +1,6 @@
-﻿using GenericSmallBusinessApp.Server.AuthenticationAndAuthorization;
+﻿using System.Security.Claims;
+
+using GenericSmallBusinessApp.Server.AuthenticationAndAuthorization;
 using GenericSmallBusinessApp.Server.Interfaces;
 using GenericSmallBusinessApp.Server.Models;
 
@@ -28,19 +30,19 @@ namespace GenericSmallBusinessApp.Server.Controllers
             return Ok(user);
         }
 
-        [HttpPost("AddUser/{id}")]
+        [HttpPost("AddUser")]
         [AllowAnonymous]
-        public async Task<ActionResult> AddUser([FromForm] UserDto request, int id)
+        public async Task<ActionResult> AddUser([FromForm] UserDto request)
         {
             var result = await service.AddUserRequest(request);
             return Ok(result);
         }
 
         [HttpPost("UpdateUser")]
-        [ServiceFilter(typeof(IdAuthorizationAttribute))]
         public async Task<ActionResult> UpdateUser([FromForm] UserDto request)
         {
-            var result = await service.UpdateUserRequest(request);
+            var id = int.Parse(User.FindFirst(c => c.Type == "id")?.Value);
+            var result = await service.UpdateUserRequest(request, id);
             return Ok(result);
         }
 
