@@ -8,6 +8,7 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var currentId = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+            var role = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "role")?.Value;
 
             if (currentId == null)
             {
@@ -17,11 +18,16 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
 
             var idFromRoute = context.RouteData.Values["id"]?.ToString();
 
-            if (idFromRoute != currentId)
-            {
-                context.Result = new StatusCodeResult(403);
+            if (role == "Admin")
                 return;
-            }
+
+            if (idFromRoute == currentId)
+                return;
+
+            if (role == "Employee" && context.HttpContext.Request.Method == "GET")
+                return;
+
+            context.Result = new StatusCodeResult(403);
         }
     }
 }

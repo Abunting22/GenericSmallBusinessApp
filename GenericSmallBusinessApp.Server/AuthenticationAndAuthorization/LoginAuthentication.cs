@@ -10,17 +10,12 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
             try
             {
                 var user = await LoginValidation(request);
-
-                if (user != null)
-                {
-                    user.JwtToken = jwt.GetJwt(user);
-                    return user;
-                }
-                return null;
+                user.JwtToken = jwt.GetJwt(user);
+                return user;
             }
             catch (Exception ex)
             {
-                throw new ArgumentException(ex.Message);
+                throw;
             }
         }
 
@@ -30,22 +25,15 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
             {
                 User user = await repository.Login(request);
 
-                bool IsValid()
-                {
-                    if (user != null &&
+                if (user != null &&
                         request.EmailAddress == user.EmailAddress &&
                         BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-                        return true;
-                    return false;
-                }
-
-                if (IsValid())
                     return user;
-                return null;
+                throw new InvalidOperationException("Invlaid username or password");
             }
             catch (Exception ex)
             {
-                throw new ArgumentException(ex.Message);
+                throw;
             }
         }
     }

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericSmallBusinessApp.Ser
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "genericsmallbusinessapp.client", "genericsmallbusinessapp.client\genericsmallbusinessapp.client.esproj", "{D5AE4B13-4590-4C71-A507-DC8B79DB37C7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{64E9F9CC-323E-46DC-BB3F-E5D27123B6B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericSmallBusinessApp.Server.Tests", "GenericSmallBusinessApp.Server.Tests\GenericSmallBusinessApp.Server.Tests.csproj", "{16CC6F85-C16B-4B91-A747-29059DE11D4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,9 +27,16 @@ Global
 		{D5AE4B13-4590-4C71-A507-DC8B79DB37C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5AE4B13-4590-4C71-A507-DC8B79DB37C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D5AE4B13-4590-4C71-A507-DC8B79DB37C7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{16CC6F85-C16B-4B91-A747-29059DE11D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16CC6F85-C16B-4B91-A747-29059DE11D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16CC6F85-C16B-4B91-A747-29059DE11D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16CC6F85-C16B-4B91-A747-29059DE11D4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{16CC6F85-C16B-4B91-A747-29059DE11D4E} = {64E9F9CC-323E-46DC-BB3F-E5D27123B6B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9AE3071-22EA-4550-BF39-D3B9E550AC6C}
