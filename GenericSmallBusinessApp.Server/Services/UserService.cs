@@ -24,6 +24,7 @@ namespace GenericSmallBusinessApp.Server.Services
         public async Task<bool> AddUserRequest(UserDto request)
         {
             var user = ConvertDtoRequest(request);
+            user.RoleId = 3;
             var result = await repository.Add(user);
             return result;
         }

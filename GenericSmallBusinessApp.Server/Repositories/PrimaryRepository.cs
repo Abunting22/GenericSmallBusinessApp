@@ -88,9 +88,9 @@ namespace GenericSmallBusinessApp.Server.Repositories
             }
             else
             {
-                var properties = string.Join(", ", typeof(T).GetProperties().Select(p => p.Name));
-                var values = string.Join(", ", typeof(T).GetProperties().Select(p => "@" + p.Name));
-                var parameter = string.Join(", ", string.Join(", ", typeof(T).GetProperties().Select(p => p.Name).Select(name => $"{name} = @{name}")));
+                var properties = string.Join(", ", typeof(T).GetProperties().Skip(1).Select(p => p.Name));
+                var values = string.Join(", ", typeof(T).GetProperties().Skip(1).Select(p => "@" + p.Name));
+                var parameter = string.Join(", ", string.Join(", ", typeof(T).GetProperties().Skip(1).Select(p => p.Name).Select(name => $"{name} = @{name}")));
                 return (properties, values, parameter);
             }
         }

@@ -39,6 +39,9 @@ namespace GenericSmallBusinessApp.Server
             builder.Services.AddScoped<UserDto>();
             builder.Services.AddScoped<LoginDto>();
             builder.Services.AddScoped<IdAuthorizationAttribute>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<Product>();
+            builder.Services.AddScoped<ProductDto>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
