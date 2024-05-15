@@ -24,9 +24,6 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
             if (idFromRoute == currentId)
                 return;
 
-            if (role == "Employee" && context.HttpContext.Request.Method == "GET")
-                return;
-
             context.Result = new StatusCodeResult(403);
         }
     }

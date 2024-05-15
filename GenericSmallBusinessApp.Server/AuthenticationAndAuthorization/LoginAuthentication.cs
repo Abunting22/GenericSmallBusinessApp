@@ -21,20 +21,13 @@ namespace GenericSmallBusinessApp.Server.AuthenticationAndAuthorization
 
         private async Task<User> LoginValidation(LoginDto request)
         {
-            try
-            {
-                User user = await repository.Login(request);
+            User user = await repository.Login(request);
 
-                if (user != null &&
-                        request.EmailAddress == user.EmailAddress &&
-                        BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-                    return user;
-                throw new InvalidOperationException("Invlaid username or password");
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            if (user != null &&
+                    request.EmailAddress == user.EmailAddress &&
+                    BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+                return user;
+            throw new InvalidOperationException("Invlaid username or password");
         }
     }
 }

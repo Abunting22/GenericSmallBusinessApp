@@ -11,11 +11,11 @@ namespace GenericSmallBusinessApp.Server.Repositories
             {
                 string sql = $"SELECT * FROM [User] WHERE EmailAddress = @EmailAddress";
                 var user = await repository.GetObject<User, dynamic>(sql, new { request.EmailAddress });
-                return user;
+                return user ?? throw new Exception("User not found");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new ArgumentException(ex.Message);
+                throw;
             }
         }
     }
